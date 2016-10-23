@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/background">
+        <file>picture/girl02.jpg</file>
+        <file>picture/cat.jpg</file>
+        <file>picture/bloe.jpg</file>
+    </qresource>
+    <qresource prefix="/icon">
+        <file>picture/close.jpg</file>
+        <file>picture/mini.jpg</file>
+        <file>picture/3.png</file>
+        <file>picture/5.png</file>
+        <file>picture/6.png</file>
+        <file>picture/8.png</file>
+    </qresource>
+</RCC>
