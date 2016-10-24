@@ -5,11 +5,14 @@
         <file>picture/bloe.jpg</file>
     </qresource>
     <qresource prefix="/icon">
-        <file>picture/close.jpg</file>
-        <file>picture/mini.jpg</file>
         <file>picture/3.png</file>
         <file>picture/5.png</file>
         <file>picture/6.png</file>
         <file>picture/8.png</file>
+        <file>picture/cross55.png</file>
+        <file>picture/minus36.png</file>
+        <file>picture/vintage36.png</file>
+        <file>picture/minus37.png</file>
+        <file>picture/plus36.png</file>
     </qresource>
 </RCC>

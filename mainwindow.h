@@ -7,6 +7,8 @@
 #include <QString>
 #include <QMouseEvent>
 #include <Windows.h>
+#include <QStringList>
+#include <QStringListModel>
 
 namespace Ui {
 class MainWindow;
@@ -32,10 +34,14 @@ private slots:
 
     void currentSongChanged(int);
 
+    void on_removeSong_clicked();
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer *player;
     QMediaPlaylist *playList;
+    QStringListModel *songs;
+    QStringList songsStrings;
     bool playState;
 };
 

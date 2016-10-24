@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QDir>
 #include <QFileDialog>
-#include <QStringList>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     player = new QMediaPlayer(this);
     playList = new QMediaPlaylist(this);
+    songs = new QStringListModel(this);
     player->setPlaylist(playList);
 
     connect(ui->volume,SIGNAL(valueChanged(int)),player,SLOT(setVolume(int)));
@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->volume->setValue(80);
     playList->setPlaybackMode(QMediaPlaylist::Loop);
     ui->centralWidget->setStyleSheet("border-image: url(:/background/picture/cat.jpg)");
+    ui->playerList->setModel(songs);
 }
 
 MainWindow::~MainWindow()
@@ -48,13 +49,13 @@ void MainWindow::on_playState_clicked()
         if(!playList->isEmpty()){
             player->play();
         }
-        ui->playState->setText(QStringLiteral("暂停"));
+        ui->playState->setStyleSheet("border-image: url(:/icon/picture/5.png);");
         playState = true;
     }
     else
     {
         player->pause();
-        ui->playState->setText(QStringLiteral("播放"));
+        ui->playState->setStyleSheet("border-image: url(:/icon/picture/6.png);");
         playState = false;
     }
 }
@@ -73,9 +74,11 @@ void MainWindow::on_addSongs_clicked()
                 playList->addMedia(QUrl::fromLocalFile(fileName));
                 QString name = fileName.split("/").last();
                 name = name.split(".").first();
-                ui->playerList->addItem(name);
+                songsStrings.append(name);
             }
         }
+        songs->removeRows(0,songs->rowCount());
+        songs->setStringList(songsStrings);
     }
     playList->setCurrentIndex(0);
 }
@@ -91,7 +94,18 @@ void MainWindow::on_playerList_doubleClicked(const QModelIndex &index)
 
 void MainWindow::currentSongChanged(int index)
 {
-    ui->playerList->setCurrentRow(index);
-    QString currentSong = ui->playerList->currentItem()->text();
+    ui->playerList->setCurrentIndex(songs->index(index));
+    QString currentSong = songs->data(songs->index(index),Qt::DisplayRole).toString();
     ui->songName->setText(currentSong);
+}
+
+void MainWindow::on_removeSong_clicked()
+{
+    int row = ui->playerList->currentIndex().row();
+    songs->removeRow(row);
+    if(row == playList->currentIndex()){
+        playList->next();
+        on_playState_clicked();
+    }
+    playList->removeMedia(row);
 }

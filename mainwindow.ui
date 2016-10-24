@@ -3,7 +3,7 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -93,6 +93,9 @@
       <height>19</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: \*url();</string>
+    </property>
     <property name="maximum">
      <number>100</number>
     </property>
@@ -104,7 +107,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>380</y>
+      <y>390</y>
       <width>231</width>
       <height>21</height>
      </rect>
@@ -122,30 +125,30 @@
    <widget class="QPushButton" name="addSongs">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>40</y>
-      <width>75</width>
-      <height>23</height>
+      <x>20</x>
+      <y>90</y>
+      <width>30</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="autoFillBackground">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: \*url();</string>
+     <string notr="true">border-image: url(:/icon/picture/plus36.png);</string>
     </property>
     <property name="text">
-     <string>添加歌曲</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QListWidget" name="playerList">
+   <widget class="QListView" name="playerList">
     <property name="enabled">
      <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>80</y>
+      <y>90</y>
       <width>261</width>
       <height>281</height>
      </rect>
@@ -160,7 +163,8 @@
      <bool>true</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: \*url();</string>
+     <string notr="true">border-image: \*url();
+background-color: rgb(14, 154, 154,10);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
@@ -176,7 +180,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/icon/picture/close.jpg);</string>
+     <string notr="true">border-image: url(:/icon/picture/cross55.png);</string>
     </property>
     <property name="text">
      <string/>
@@ -197,8 +201,11 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="statusTip">
+     <string>最小化</string>
+    </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/icon/picture/mini.jpg);</string>
+     <string notr="true">border-image: url(:/icon/picture/minus36.png);</string>
     </property>
     <property name="text">
      <string/>
@@ -212,6 +219,25 @@
     <property name="autoDefault">
      <bool>false</bool>
     </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="removeSong">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/icon/picture/minus37.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
    <zorder>close</zorder>
    <zorder>minimize</zorder>
@@ -222,6 +248,7 @@
    <zorder>songName</zorder>
    <zorder>addSongs</zorder>
    <zorder>playerList</zorder>
+   <zorder>removeSong</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
