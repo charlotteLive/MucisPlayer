@@ -14,5 +14,6 @@
         <file>picture/vintage36.png</file>
         <file>picture/minus37.png</file>
         <file>picture/plus36.png</file>
+        <file>picture/volume.png</file>
     </qresource>
 </RCC>

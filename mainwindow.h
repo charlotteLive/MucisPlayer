@@ -36,6 +36,12 @@ private slots:
 
     void on_removeSong_clicked();
 
+    void on_durationChanged(qint64 );
+
+    void on_positionChanged(qint64);
+
+    void on_progressSliderMoved(int);
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer *player;

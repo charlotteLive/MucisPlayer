@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDir>
 #include <QFileDialog>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lastSong,SIGNAL(clicked()),playList,SLOT(previous()));
     connect(ui->nextSong,SIGNAL(clicked()),playList,SLOT(next()));
     connect(playList,SIGNAL(currentIndexChanged(int)),this,SLOT(currentSongChanged(int)));
+    connect(player,SIGNAL(durationChanged(qint64)),this,SLOT(on_durationChanged(qint64)));
+    connect(player,SIGNAL(positionChanged(qint64)),this,SLOT(on_positionChanged(qint64)));
+    connect(ui->progressSlider,SIGNAL(sliderMoved(int)),this,SLOT(on_progressSliderMoved(int)));
 
     connect(ui->close,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->minimize,SIGNAL(clicked()),this,SLOT(showMinimized()));
@@ -108,4 +112,23 @@ void MainWindow::on_removeSong_clicked()
         on_playState_clicked();
     }
     playList->removeMedia(row);
+}
+
+void MainWindow::on_durationChanged(qint64 duration)
+{
+    ui->progressSlider->setRange(0,duration);
+}
+
+void MainWindow::on_positionChanged(qint64 position)
+{
+    ui->progressSlider->setValue(position);
+    QTime playCurrentTime(0,position/60000,position/1000%60);
+    ui->progress->setText(playCurrentTime.toString("mm:ss"));
+}
+
+void MainWindow::on_progressSliderMoved(int position)
+{
+    player->setPosition(position);
+    QTime playCurrentTime(0,position/60000,position/1000%60);
+    ui->progress->setText(playCurrentTime.toString("mm:ss"));
 }
